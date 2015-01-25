@@ -15,7 +15,7 @@ import sys
 ##R = (1000000*R_Mbps) / 8  #unit: Bps
 ##B = B_MB * 1000000   #unit: Byte
 
-R = int(raw_input("Please enter the rate: ")) * 1000000 / 8
+R = float(raw_input("Please enter the rate: ")) * 1000000 / 8
 B = int(raw_input("Please enter the buffer size: ")) * 1000000
     
 thro_threshold = 10 / 8 #unit: kBps
@@ -228,8 +228,12 @@ def cal_violation():
                 #print buffered_product
                 i -= 1
             i += 1
-    if (num_violation / float(product_num)) > throughput_threshold_ratio:   # M/N <= H equation.   num_violation is the number whose throughput < G, 
+    if (num_violation / float(product_num)) > throughput_threshold_ratio:   # M/N <= H equation.   num_violation is the number whose throughput < G
+        print 'mean throughput: ' + str(through_sum / float(product_num) * 8)
+        throughput_violation_percent = (num_violation / float(product_num))
+        print 'throughput violation rate:' + str(throughput_violation_percent)
         return False
+
     else:
         print 'mean throughput: ' + str(through_sum / float(product_num) * 8)
         throughput_violation_percent = (num_violation / float(product_num))
