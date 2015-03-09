@@ -46,7 +46,7 @@ for line in f:
             
             cretime = (currentlist[5])
             
-            delay = latency(cretime, rectime)
+            delay = abs(latency(cretime, rectime)) #Fix negative problem.
             writer.writerows([(int(currentlist[4]), str(currentlist[5]),str(currentlist[0]),int(delay))])
 f.close()
 
